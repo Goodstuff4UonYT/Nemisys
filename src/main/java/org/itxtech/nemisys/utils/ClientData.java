@@ -11,7 +11,7 @@ public class ClientData {
     public Map<String, Entry> clientList = new HashMap<>();
 
     public class Entry {
-        public Entry(String ip, int port, int playerCount, int maxPlayers, String description, float tps, float load, long upTime) {
+        public Entry(String ip, int port, int playerCount, int maxPlayers, String description, float tps, float load, long upTime, String playerName) {
             this.ip = ip;
             this.port = port;
             this.playerCount = playerCount;
@@ -20,6 +20,7 @@ public class ClientData {
             this.tps = tps;
             this.load = load;
             this.upTime = upTime;
+            this.playerNames = playerNames;
         }
 
         private String ip;
@@ -30,6 +31,7 @@ public class ClientData {
         private float tps;
         private float load;
         private long upTime;
+        private String playerNames;
 
         public String getIp() {
             return ip;
@@ -62,8 +64,11 @@ public class ClientData {
         public long getUpTime(){
             return this.upTime;
         }
-    }
-
+         
+       public String getPlayerNames() {
+          return this.playerNames; 
+        }
+     }
     public String getHashByDescription(String description) {
         final String[] re = new String[1];
         this.clientList.forEach((hash, entry) -> {
