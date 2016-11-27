@@ -207,8 +207,10 @@ public class Server {
         if(this.clients.size() > 0){
             this.clientData = new ClientData();
             for (Client client: this.clients.values()){
+                String cdataplayernames = "";
+                cdataplayernames = client.getPlayerNames();    
                 ClientData.Entry entry = this.clientData.new Entry(client.getIp(), client.getPort(), client.getPlayers().size(),
-                        client.getMaxPlayers(), client.getDescription(), client.getTicksPerSecond(), client.getTickUsage(), client.getUpTime());
+                        client.getMaxPlayers(), client.getDescription(), client.getTicksPerSecond(), client.getTickUsage(), client.getUpTime(), cdataplayernames);
                 this.clientData.clientList.put(client.getHash(), entry);
             }
             this.clientDataJson = new Gson().toJson(this.clientData);
