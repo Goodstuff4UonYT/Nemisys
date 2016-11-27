@@ -30,6 +30,7 @@ public class Client {
     private float tps;
     private float load;
     private long upTime;
+    private String playerNames;	
 
     public Client(SynapseInterface interfaz, String ip, int port) {
         this.server = interfaz.getServer();
@@ -111,7 +112,7 @@ public class Client {
                 pk.type = InformationPacket.TYPE_CLIENT_DATA;
                 pk.message = this.server.getClientDataJson();
                 this.sendDataPacket(pk);
-
+		this.server.updateClientData();
                 break;
             case SynapseInfo.CONNECT_PACKET:
                 ConnectPacket connectPacket = (ConnectPacket)packet;
@@ -230,7 +231,20 @@ public class Client {
     public boolean isVerified() {
         return this.verified;
     }
-
+    
+    public String getPlayerNames() {
+         String playerNames = "";
+         for (Player player : this.getPlayers().values()) {
+             if (playerNames == "") {
+                 playerNames = player.getName();
+             } else {
+                playerNames = playerNames + ", " + player.getName();
+             }
+         }
+        return playerNames;
+     }
+ 
+	
     public void setVerified() {
         this.verified = true;
     }
